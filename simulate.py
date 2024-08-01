@@ -10,11 +10,12 @@ b2 = [1.8, 0.0, -3.0, 0.3, 0.5]
 b3 = [1.0, 2.5, 0.0, -0.3, 0.2]
 
 # setting the time delta and number of iterations
-dt = 4e-2
-iterations = 1000
+dt = 1e-1
+iterations = 60
 
 # calling rust function
-[b1,b2,b3] = three_body_hash.calc_three_body(b1,b2,b3,dt,iterations)
+#[b1,b2,b3] = three_body_hash.calc_three_body(b1,b2,b3,dt,iterations)
+[b1,b2,b3] = three_body_hash.calc_hash_animation(b1,b2,2.0,"/Users/yoavnir/Documents/python/three_body_hash/text_example.txt",dt,iterations)
 
 # animation process
 fig, ax = plt.subplots(1, 1)
@@ -27,15 +28,15 @@ def animate(i):
     ax.add_patch(Rectangle((-4.0,-4.0),8.0,8.0, linewidth=1, edgecolor='k', facecolor='none'))
 
     ax.plot(b1[0][i], b1[1][i], marker='o',color='r')
-    ax.plot(b1[0][max(i-15,0):i], b1[1][max(i-15,0):i],color='r')
+    ax.plot(b1[0][max(i-20,0):i], b1[1][max(i-20,0):i],color='r')
 
     # Plot that point using the x and y coordinates
     ax.plot(b2[0][i], b2[1][i], marker='o',color='g')
-    ax.plot(b2[0][max(i-15,0):i], b2[1][max(i-15,0):i],color='g')
+    ax.plot(b2[0][max(i-20,0):i], b2[1][max(i-20,0):i],color='g')
 
     # Plot that point using the x and y coordinates
     ax.plot(b3[0][i], b3[1][i], marker='o',color='b')
-    ax.plot(b3[0][max(i-15,0):i], b3[1][max(i-15,0):i],color='b')
+    ax.plot(b3[0][max(i-20,0):i], b3[1][max(i-20,0):i],color='b')
 
     ax.set_xlim([-5, 5])
     ax.set_ylim([-5, 5])
