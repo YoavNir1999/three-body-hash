@@ -69,7 +69,6 @@ fn calc_hash_animation(b1:Vec<f32>,b2:Vec<f32>,b3mass:f32,file:String,dt:f32,ite
             b3_y.push(b3.y);
         }
 
-        println!("{}",file_bytes[byte*4]);
         b3 = body::new(b3mass
             , int_to_float(file_bytes[byte*4], 32.0, 4.0)
             , int_to_float(file_bytes[byte*4+1], 32.0, 4.0)

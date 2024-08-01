@@ -1,21 +1,21 @@
 import three_body_hash
 import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation
+from matplotlib.animation import FuncAnimation, PillowWriter
 from matplotlib.animation import FFMpegWriter
 from matplotlib.patches import Rectangle
 
 #    mass  x    y    Vx    Vy
-b1 = [2.0, 0.0, 3.0, 0.3, -0.5]
-b2 = [1.8, 0.0, -3.0, 0.3, 0.5]
-b3 = [1.0, 2.5, 0.0, -0.3, 0.2]
+b1 = [1.8, 0.0, 3.0, 0.3, -0.5]
+b2 = [1.7, 0.0, -3.0, 0.3, 0.5]
+b3 = [1.6, 2.5, 0.0, -0.3, 0.2]
 
 # setting the time delta and number of iterations
 dt = 1e-1
-iterations = 60
+iterations = 2000
 
 # calling rust function
-#[b1,b2,b3] = three_body_hash.calc_three_body(b1,b2,b3,dt,iterations)
-[b1,b2,b3] = three_body_hash.calc_hash_animation(b1,b2,2.0,"/Users/yoavnir/Documents/python/three_body_hash/text_example.txt",dt,iterations)
+[b1,b2,b3] = three_body_hash.calc_three_body(b1,b2,b3,dt,iterations)
+#[b1,b2,b3] = three_body_hash.calc_hash_animation(b1,b2,1.4,"/Users/yoavnir/Documents/python/three_body_hash/sample photo.jpg",dt,iterations)
 
 # animation process
 fig, ax = plt.subplots(1, 1)
@@ -43,10 +43,10 @@ def animate(i):
 
 
 ani = FuncAnimation(fig, animate, frames=len(b1[0]),
-                    interval=30, repeat=False)
-plt.close()
+                    interval=10, repeat=False)
+plt.show()
 # Save the animation as an animated GIF
-#ani.save("simulation.gif", dpi=200,
-#         writer=PillowWriter(fps=20))
+ani.save("simulation.gif", dpi=200,
+         writer=PillowWriter(fps=20))
 
-ani.save(filename="/Users/yoavnir/Documents/python/three_body_hash/video_simulation.mp4", writer="ffmpeg",fps=30,dpi=150)
+#ani.save(filename="/Users/yoavnir/Documents/python/three_body_hash/video_simulation.mp4", writer="ffmpeg",fps=30,dpi=150)
