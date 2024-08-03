@@ -22,7 +22,7 @@ impl body {
     pub fn calc_force_div_mass(&self,other:&body) -> [f32;2] {
         let r_vector  = [other.x-self.x,other.y-self.y];
         let dist = (r_vector[0].powi(2)+r_vector[1].powi(2)).powf(1.5);
-        return [self.mass*other.mass*r_vector[0]/dist,self.mass*r_vector[1]/dist]
+        return [self.mass*other.mass*r_vector[0]/dist,self.mass*other.mass*r_vector[1]/dist]
     }
 
     //calculating the next position vector
@@ -36,11 +36,12 @@ impl body {
         self.vx = self.vx+0.5*(a_new[0]+a_old[0])*dt;
         self.vy = self.vy+0.5*(a_new[1]+a_old[1])*dt;
 
-        let limx = 4.0;
-        let limy = 4.0;
+        let limx = 128.0;
+        let limy = 128.0;
+        let damping = -0.7;
 
         if self.x.abs() > limx{
-            self.vx = -0.5 * self.vx;
+            self.vx = damping * self.vx;
             if self.x>limx {
                 self.x = limx
             } else if self.x<limx {
@@ -48,7 +49,7 @@ impl body {
             };
         };
         if self.y.abs() > limy {
-            self.vy = -0.5 * self.vy;
+            self.vy = damping * self.vy;
             if self.y>limy {
                 self.y = limy
             } else if self.y<limy {

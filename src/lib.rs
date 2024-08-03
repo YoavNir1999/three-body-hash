@@ -12,10 +12,10 @@ fn calc_hash_animation(b1:Vec<f32>,b2:Vec<f32>,b3mass:f32,file:String,dt:f32,ite
     let file_bytes = fs::read(file).unwrap();
     let file_len = file_bytes.len();
     let mut b3 = body::new(b3mass
-                                , int_to_float(file_bytes[0], 32.0, 4.0)
-                                , int_to_float(file_bytes[1], 32.0, 4.0)
-                                , int_to_float(file_bytes[2], 85.0, 1.5)
-                                , int_to_float(file_bytes[3], 85.0, 1.5));
+                                , int_to_float(file_bytes[0], 1.0, 127.0)
+                                , int_to_float(file_bytes[1], 1.0, 127.0)
+                                , int_to_float(file_bytes[2], 5.0, 6.3)
+                                , int_to_float(file_bytes[3], 5.0, 6.3));
 
     //calculating initial conditions
     let a12 = b1.calc_force_div_mass(&b2);
@@ -72,10 +72,10 @@ fn calc_hash_animation(b1:Vec<f32>,b2:Vec<f32>,b3mass:f32,file:String,dt:f32,ite
         }
 
         b3 = body::new(b3mass
-            , int_to_float(file_bytes[byte*4], 32.0, 4.0)
-            , int_to_float(file_bytes[byte*4+1], 32.0, 4.0)
-            , int_to_float(file_bytes[byte*4+2], 85.0, 1.5)
-            , int_to_float(file_bytes[byte*4+3], 85.0, 1.5));
+            , int_to_float(file_bytes[byte*4], 1.0, 127.0)
+            , int_to_float(file_bytes[byte*4+1], 1.0, 127.0)
+            , int_to_float(file_bytes[byte*4+2], 10.0, 12.7)
+            , int_to_float(file_bytes[byte*4+3], 10.0, 12.7));
         
     }
 
