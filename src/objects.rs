@@ -1,5 +1,5 @@
 //objects
-pub struct body {
+pub struct Body {
     pub mass : f32,
     pub x : f32,
     pub y : f32,
@@ -7,9 +7,9 @@ pub struct body {
     vy : f32
 }
 
-impl body {
-    pub fn new(mass:f32,x:f32,y:f32,vx:f32,vy:f32) -> body {
-        let b = body{
+impl Body {
+    pub fn new(mass:f32,x:f32,y:f32,vx:f32,vy:f32) -> Body {
+        let b = Body{
             mass,
             x,
             y,
@@ -19,7 +19,7 @@ impl body {
         b
     }
     //calculating the force vectors
-    pub fn calc_force_div_mass(&self,other:&body) -> [f32;2] {
+    pub fn calc_force_div_mass(&self,other:&Body) -> [f32;2] {
         let r_vector  = [other.x-self.x,other.y-self.y];
         let dist = (r_vector[0].powi(2)+r_vector[1].powi(2)).powf(1.5);
         return [self.mass*other.mass*r_vector[0]/dist,self.mass*other.mass*r_vector[1]/dist]

@@ -5,13 +5,13 @@ use objects::*;
 
 #[pyfunction]
 fn calc_hash_animation(b1:Vec<f32>,b2:Vec<f32>,b3mass:f32,file:String,dt:f32,iterations_per_byte:usize) -> PyResult<Vec<Vec<Vec<f32>>>> {
-    //initializing body structs
-    let mut b1 = body::new(b1[0],b1[1], b1[2], b1[3], b1[4]);
-    let mut b2 = body::new(b2[0],b2[1], b2[2], b2[3], b2[4]);
+    //initializing Body structs
+    let mut b1 = Body::new(b1[0],b1[1], b1[2], b1[3], b1[4]);
+    let mut b2 = Body::new(b2[0],b2[1], b2[2], b2[3], b2[4]);
     //creating bytes vector
     let file_bytes = fs::read(file).unwrap();
     let file_len = file_bytes.len();
-    let mut b3 = body::new(b3mass
+    let mut b3 = Body::new(b3mass
                                 , int_to_float(file_bytes[0], 1.0, 127.0)
                                 , int_to_float(file_bytes[1], 1.0, 127.0)
                                 , int_to_float(file_bytes[2], 5.0, 6.3)
@@ -71,7 +71,7 @@ fn calc_hash_animation(b1:Vec<f32>,b2:Vec<f32>,b3mass:f32,file:String,dt:f32,ite
             b3_y.push(b3.y);
         }
 
-        b3 = body::new(b3mass
+        b3 = Body::new(b3mass
             , int_to_float(file_bytes[byte*4], 1.0, 127.0)
             , int_to_float(file_bytes[byte*4+1], 1.0, 127.0)
             , int_to_float(file_bytes[byte*4+2], 10.0, 12.7)
@@ -87,10 +87,10 @@ fn calc_hash_animation(b1:Vec<f32>,b2:Vec<f32>,b3mass:f32,file:String,dt:f32,ite
 
 #[pyfunction]
 fn calc_three_body(b1:Vec<f32>,b2:Vec<f32>,b3:Vec<f32>,dt:f32,iterations:usize) -> PyResult<Vec<Vec<Vec<f32>>>> {
-    //initializing body structs
-    let mut b1 = body::new(b1[0],b1[1], b1[2], b1[3], b1[4]);
-    let mut b2 = body::new(b2[0],b2[1], b2[2], b2[3], b2[4]);
-    let mut b3 = body::new(b3[0],b3[1], b3[2], b3[3], b3[4]);
+    //initializing Body structs
+    let mut b1 = Body::new(b1[0],b1[1], b1[2], b1[3], b1[4]);
+    let mut b2 = Body::new(b2[0],b2[1], b2[2], b2[3], b2[4]);
+    let mut b3 = Body::new(b3[0],b3[1], b3[2], b3[3], b3[4]);
 
     //calculating initial conditions
     let a12 = b1.calc_force_div_mass(&b2);
