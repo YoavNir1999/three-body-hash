@@ -38,7 +38,7 @@ impl body {
 
         let limx = 128.0;
         let limy = 128.0;
-        let damping = -0.7;
+        let damping = -0.7; // damping ratio when hitting an obstacle
 
         if self.x.abs() > limx{
             self.vx = damping * self.vx;
