@@ -16,15 +16,15 @@ def physical_simulation(b1,b2,b3,save):
         # Plot that point using the x and y coordinates
         ax.add_patch(Rectangle((-128.0,-128.0),256.0,256.0, linewidth=1, edgecolor='k', facecolor='none'))
 
-        ax.plot(b1[0][i], b1[1][i], marker='o',color='r',markersize=7)
+        ax.plot(b1[0][i], b1[1][i], marker='o',color='r',markersize=7,label="b1")
         ax.plot(b1[0][max(i-20,0):i], b1[1][max(i-20,0):i],color='r')
 
         # Plot that point using the x and y coordinates
-        ax.plot(b2[0][i], b2[1][i], marker='o',color='g',markersize=7)
+        ax.plot(b2[0][i], b2[1][i], marker='o',color='g',markersize=7,label="b2")
         ax.plot(b2[0][max(i-20,0):i], b2[1][max(i-20,0):i],color='g')
 
         # Plot that point using the x and y coordinates
-        ax.plot(b3[0][i], b3[1][i], marker='o',color='b',markersize=7)
+        ax.plot(b3[0][i], b3[1][i], marker='o',color='b',markersize=7,label="b3")
         ax.plot(b3[0][max(i-20,0):i], b3[1][max(i-20,0):i],color='b')
 
         ax.set_xlim([-128, 128])
@@ -54,3 +54,47 @@ def float_to_hex_concat(f1, f2, f3, f4):
     hex_concat = hex_f1 + hex_f2 + hex_f3 + hex_f4
     
     return hex_concat
+
+def divergence_simulation(b1,b2,b3,b1d,b2d,b3d,save):
+    # animation process
+    fig, ax = plt.subplots(1, 1)
+    fig.set_size_inches(7,7)
+    alpha = 0.4
+    
+    def animate(i):
+        ax.clear()
+        # Get the point from the points list at index i
+        # Plot that point using the x and y coordinates
+        ax.add_patch(Rectangle((-128.0,-128.0),256.0,256.0, linewidth=1, edgecolor='k', facecolor='none'))
+
+        ax.plot(b1[0][i], b1[1][i], marker='o',color='r',markersize=7,label="original b1")
+        ax.plot(b1[0][max(i-20,0):i], b1[1][max(i-20,0):i],color='r')
+
+        ax.plot(b1d[0][i], b1d[1][i], marker='o',color='r',markersize=7,alpha=alpha,label="diverging b1")
+        ax.plot(b1d[0][max(i-20,0):i], b1d[1][max(i-20,0):i],color='r',alpha=alpha)
+
+        ax.plot(b2[0][i], b2[1][i], marker='o',color='g',markersize=7,label="original b2")
+        ax.plot(b2[0][max(i-20,0):i], b2[1][max(i-20,0):i],color='g')
+
+        ax.plot(b2d[0][i], b2d[1][i], marker='o',color='g',markersize=7,alpha=alpha,label="diverging b2")
+        ax.plot(b2d[0][max(i-20,0):i], b2d[1][max(i-20,0):i],color='g',alpha=alpha)
+
+        ax.plot(b3[0][i], b3[1][i], marker='o',color='b',markersize=7,label="original b3")
+        ax.plot(b3[0][max(i-20,0):i], b3[1][max(i-20,0):i],color='b')
+        
+        ax.plot(b3d[0][i], b3d[1][i], marker='o',color='b',markersize=7,alpha=alpha,label="diverging b3")
+        ax.plot(b3d[0][max(i-20,0):i], b3d[1][max(i-20,0):i],color='b',alpha=alpha)
+
+        ax.set_xlim([-128, 128])
+        ax.set_ylim([-128, 128])
+        #ax.legend(loc="upper right",ncol=3,fontsize=6)
+
+
+
+    ani = FuncAnimation(fig, animate, frames=len(b1[0]),
+                        interval=10, repeat=False)
+    if save:
+        ani.save(filename="/Users/yoavnir/Documents/python/three_body_hash/video_simulation.mp4", writer="ffmpeg",fps=30,dpi=150)
+    else:
+        plt.show()
+    return
