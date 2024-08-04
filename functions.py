@@ -40,7 +40,7 @@ def physical_simulation(b1,b2,b3,save):
         plt.show()
     return
 
-def chaotic_hash(b1,b2):
+def calc_hash(b1,b2):
     return float_to_hex_concat(b1[0][-1],b1[1][-1],b2[0][-1],b2[1][-1])
 
 def float_to_hex_concat(f1, f2, f3, f4):
