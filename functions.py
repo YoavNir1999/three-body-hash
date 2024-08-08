@@ -3,7 +3,7 @@ from matplotlib.animation import FuncAnimation
 from matplotlib.animation import FFMpegWriter
 from matplotlib.patches import Rectangle
 import struct
-
+import numpy as np
 
 def physical_simulation(b1,b2,b3,save):
     # animation process
@@ -97,4 +97,36 @@ def divergence_simulation(b1,b2,b3,b1d,b2d,b3d,save):
         ani.save(filename="/Users/yoavnir/Documents/python/three_body_hash/video_simulation.mp4", writer="ffmpeg",fps=30,dpi=150)
     else:
         plt.show()
+    return
+
+def generate_uniform_array(n):
+    # Generate n uniformly distributed numbers between 0 and 255
+    uniform_dist = np.random.uniform(low=0, high=256, size=n)
+    
+    # Cast to integers
+    uniform_dist_int = uniform_dist.astype(int)
+    
+    return uniform_dist_int
+
+def plot_distribution(hashes):
+    # animation process
+    fig, ((b1x,b1y),(b2x,b2y)) = plt.subplots(2, 2)
+    fig.set_size_inches(7,7)
+
+    b1x.hist([h[0] for h in hashes],color="r")
+    b1x.set_title("mass a in x plane")
+    
+    b1y.hist([h[1] for h in hashes],color="r")
+    b1y.set_title("mass a in y plane")
+
+    b2x.hist([h[2] for h in hashes],color="g")
+    b2x.set_title("mass b in x plane")
+    
+    b2y.hist([h[3] for h in hashes],color="g")
+    b2y.set_title("mass b in y plane")
+
+    #ax.scatter([h[0] for h in hashes],[h[1] for h in hashes],color="r")
+    #ax.scatter([h[2] for h in hashes],[h[3] for h in hashes],color="g")
+
+    plt.show()
     return

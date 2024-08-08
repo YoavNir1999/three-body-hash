@@ -24,3 +24,8 @@ Let's look a visualization of the process where the blue ball represents mass c:
 <img src="https://github.com/YoavNir1999/three-body-hash/blob/main/hash animation.gif" width="400" height="400"/>
 
 Finally, the fast hash function only returns the output and discards information about the system along the way, it runs in linear time O(n) where n is the length of the input vector and returns an output such as "c08bbcd3c272c940425242a8c20e9202" which represents parameters about masses a and b as explained earlier.
+
+Now for our final test, let's check if the hashing function is uniformly distributed over 10,000 random uniformly distributed arrays as inputs:
+<img src="https://github.com/YoavNir1999/three-body-hash/blob/main/uniform distribution.png" width="400" height="400"/>
+
+As we can see, this indeed appears to be uniform.
