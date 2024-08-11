@@ -4,6 +4,7 @@ from matplotlib.animation import FFMpegWriter
 from matplotlib.patches import Rectangle
 import struct
 import numpy as np
+import three_body_hash
 
 def physical_simulation(b1,b2,b3,save):
     # animation process
@@ -130,3 +131,13 @@ def plot_distribution(hashes):
 
     plt.show()
     return
+
+def distribution_test(b1,b2,b3mass,number_of_tests,length_of_test_input,dt,file_iterations):
+    rand_arrays = [generate_uniform_array(length_of_test_input) for i in range(number_of_tests)]
+
+    hashes = []
+
+    for arr in rand_arrays:
+        hashes += [three_body_hash.fast_hash_data(b1,b2,b3mass,arr,dt,file_iterations)]
+
+    return hashes

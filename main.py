@@ -34,13 +34,5 @@ demo_file = "/Users/yoavnir/Documents/python/three_body_hash/sample photo.jpg"
 #functions.divergence_simulation(b1,b2,b3,b1d,b2d,b3d,False)
 
 ###* checking uniformality
-"""
-rand_arrays = [functions.generate_uniform_array(30) for i in range(10000)]
-
-hashes = []
-
-for arr in rand_arrays:
-    hashes += [three_body_hash.fast_hash_data(b1s,b2s,9.5e4,arr,dt,file_iterations)]
-
-functions.plot_distribution(hashes)
-"""
+#hashes = functions.distribution_test(b1s,b2s,9.5e4,10000,30,dt,file_iterations)
+#functions.plot_distribution(hashes)
