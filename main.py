@@ -1,14 +1,24 @@
 import three_body_hash
 import functions
+from objects import Body
 
-#    mass    x    y      Vx    Vy
+# masses initialization
+b1s = Body(mass = 8e4, x = 0.0, y = 120.0, vx = 20.0, vy = -16.0).to_list()
+b2s = Body(mass = 8e4, x = 0.0, y = -120.0, vx = -20.0, vy = 16.0).to_list()
+b3s1 = Body(mass = 9e4, x = -40.0, y = 0.0, vx = 16.0, vy = 14.5).to_list()
+
+# mass used for divergence simulation
+b3s2 = Body(mass = 9e4, x = -40.0, y = 0.0, vx = 16.1, vy = 14.5).to_list()
+
+""" old method for difining masses
+#     mass    x    y      Vx    Vy
 b1s = [8e4, 0.0, 120.0, 20.0, -16.0]
 b2s = [8e4, 0.0, -120.0, -20.0, 16.0]
 b3s1 = [9e4, -40.0, 0.0, 16.0, 14.5]
 
 # mass used for divergence simulation
 b3s2 = [9e4, -40.0, 0.0, 16.1, 14.5]
-
+"""
 
 # setting the time delta and number of iterations
 dt = 5e-2
